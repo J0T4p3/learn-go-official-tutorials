@@ -1,19 +1,23 @@
 package main
 
 import (
-	"log"
-	"fmt"
 	"example/greetings"
+	"fmt"
+	"log"
 )
 
 func main() {
 	log.SetPrefix("greetings: ")
 
-	message, err:= greetings.Hello("João")
+	names := []string{"João", "Pedro", "Amanda"}
+
+	messages, err := greetings.Hellos(names)
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	fmt.Println(message)
+	for _, message := range messages {
+		fmt.Println(message)
+	}
 }

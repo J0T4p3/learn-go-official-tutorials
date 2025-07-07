@@ -12,7 +12,30 @@ func Hello(name string) (string, error) {
 	}
 
 	message := fmt.Sprintf(randomFormat(), name)
+
 	return message, nil
+}
+
+func Hellos(names []string) (map[string]string, error) {
+	// Verifies if the map is empty
+	if len(names) == 0 {
+		return nil, errors.New("empty name")
+	}
+
+	// Declares the new map (dictionary) of keys and values as string
+	messages := make(map[string]string)
+
+	// Iterates over the map of names and create a new message for
+	// each of them
+	for _, name := range names {
+		message, err := Hello(name)
+		if err != nil {
+			return nil, err
+		}
+		messages[name] = message
+	}
+
+	return messages, nil
 }
 
 func randomFormat() string {
@@ -21,6 +44,5 @@ func randomFormat() string {
 		"Qualé, %v! Tudo em cima?",
 		"Como é que é, %v? Numa  boa?",
 	}
-
 	return greetings[rand.Intn(len(greetings))]
 }
